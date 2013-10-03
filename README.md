@@ -1,3 +1,6 @@
+Author
+==========
+"Bickley, Daniel", bickledb
 07_HeapLab
 ==============
 
