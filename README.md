@@ -1,3 +1,6 @@
+Author
+==========
+"Emrick, Garrett", emrickgj
 07_HeapLab
 ==============
 
