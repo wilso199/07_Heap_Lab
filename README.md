@@ -1,3 +1,6 @@
+Author
+==========
+"Proctor, Patrick", proctopj
 07_HeapLab
 ==============
 
