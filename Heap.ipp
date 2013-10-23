@@ -46,7 +46,7 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
   //TODO
   unsigned long parent = (index-1)%2;
 
-  while(backingArray[index]>backingArray[parent]){
+  while(index > 0 && backingArray[index]>backingArray[parent]){
 		std::pair<Pri, T> temp = backingArray[index];
 		backingArray[index] = backingArray[parent];
         backingArray[parent] = temp;
