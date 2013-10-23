@@ -6,7 +6,6 @@ Heap<Pri,T>::Heap(){
   arrSize = START_SIZE;
   numItems = 0;
   backingArray = new std::pair<Pri, T>[arrSize]();
-
 }
 
 template<class Pri, class T>
@@ -46,14 +45,14 @@ template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
   //TODO
   unsigned long parent = (index-1)%2;
-  while(true){
-	Pri temp = backingArray[index];
-	backingArray[index] = backingArray[parent];
-	backingArray[parent] = temp;
-	index = parent;
-	parent = (index-1)%2;
+  while(false){
+		std::pair<Pri, T> temp = backingArray[index];
+		backingArray[index] = backingArray[parent];
+        backingArray[parent] = temp;
+        index = parent;
+        parent = (index-1)%2;
   }
-  
+    
 }
 
 template<class Pri, class T>
