@@ -38,26 +38,49 @@ void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
 	grow();
   backingArray[numItems+1]= toAdd;
   bubbleUp(numItems-1);
-  numItems++;
+ // numItems++;
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
   //TODO
   unsigned long parent = (index-1)%2;
-  while(false){
+
+  while(backingArray[index]>backingArray[parent]){
 		std::pair<Pri, T> temp = backingArray[index];
 		backingArray[index] = backingArray[parent];
         backingArray[parent] = temp;
         index = parent;
         parent = (index-1)%2;
   }
-    
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
   //TODO
+
+  unsigned long leftChild = 2*index +1;
+  unsigned long rightChild = 2*index+2;
+
+  while(backingArray[index]>backingArray[leftChild] || backingArray[index]>backingArray[rightChild]){
+	if(leftChild<=rightChild){
+		std::pair<Pri, T> temp = backingArray[index];
+		backingArray[index]=backingArray[leftChild];
+		backingArray[leftChild]=temp;
+		index = leftChild;
+		leftChild = 2*index+1;
+	}
+	else{
+		std::pair<Pri, T> temp1 = backingArray[index];
+		backingArray[index]=backingArray[rightChild];
+		backingArray[rightChild]=temp;
+		index = rightChild;
+		rightChild = 2*index+1;
+	}
+  }
+  
+
+
 }
 
 template<class Pri, class T>
