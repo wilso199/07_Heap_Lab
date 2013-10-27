@@ -37,8 +37,8 @@ void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
   if(numItems + 1>arrSize)
 	grow();
   backingArray[numItems+1]= toAdd;
-  bubbleUp(numItems-1);
- // numItems++;
+  numItems++;
+  bubbleUp(numItems);
 }
 
 template<class Pri, class T>
@@ -46,46 +46,59 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
   //TODO
   unsigned long parent = (index-1)%2;
   while(index > 0 && std::get<0>(backingArray[index])<std::get<0>(backingArray[parent])){
-		std::pair<Pri, T> temp = backingArray[index];
-		backingArray[index] = backingArray[parent];
-        backingArray[parent] = temp;
+		backingArray[index].swap(backingArray[parent]);
         index = parent;
         parent = (index-1)%2;
   }
 }
 
+
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
   //TODO
 
-  unsigned long leftChild = 2*index +1;
-  unsigned long rightChild = 2*index+2;
-
-  while(backingArray[index]>backingArray[leftChild] || backingArray[index]>backingArray[rightChild]){
-	if(leftChild<=rightChild){
-		std::pair<Pri, T> temp = backingArray[index];
-		backingArray[index]=backingArray[leftChild];
-		backingArray[leftChild]=temp;
-		index = leftChild;
-		leftChild = 2*index+1;
-	}
-	else{
-		std::pair<Pri, T> temp1 = backingArray[index];
-		backingArray[index]=backingArray[rightChild];
-		backingArray[rightChild]=temp;
-		index = rightChild;
-		rightChild = 2*index+1;
-	}
-  }
   
 
+  do {
 
+	  unsigned long leftChild = 2*index +1;
+	  unsigned long rightChild = 2*index+2;
+      unsigned long j = -1;
+      unsigned long r = rightChild;
+      if (r < numItems && std::get<0>(backingArray[r])<std::get<0>(backingArray[index])) {
+        int l = leftChild;
+        if (std::get<0>(backingArray[leftChild])<std::get<0>(backingArray[rightChild])) {
+          j = l;
+        } else {
+          j = r;
+        }
+      } else {
+        int l = leftChild;
+        if (l < numItems && std::get<0>(backingArray[leftChild])<std::get<0>(backingArray[index])) {
+          j = l;
+        }
+      }
+      if (j >= 0) {
+		backingArray[index].swap(backingArray[j]);
+	  } 
+      index = j;
+
+   } while (index >= 0);
+  
 }
+
+
 
 template<class Pri, class T>
 std::pair<Pri,T> Heap<Pri,T>::remove(){
   //TODO
-  std::pair<Pri,T> tmp;
+
+  if(numItems==0)
+	throw (std::string)"Empty, can't remove";
+  std::pair<Pri,T> tmp = backingArray[0];
+  backingArray[0] = backingArray[numItems-1];
+  trickleDown(0);
+  numItems--;
   return tmp;
 }
 
