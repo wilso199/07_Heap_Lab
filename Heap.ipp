@@ -62,14 +62,16 @@ void Heap<Pri,T>::trickleDown(unsigned long index){
 
 	 unsigned long leftChild;
 	  unsigned long rightChild;
-	  while(index<numItems && index<arrSize/2){
+	  while(index<numItems){
 
 		 leftChild = 2*index + 1;
 	     rightChild = 2*index + 2;
+		 
 
 	     if(std::get<0>(backingArray[leftChild])<std::get<0>(backingArray[rightChild])){
 			backingArray[index].swap(backingArray[leftChild]);
 			index = leftChild;
+			
 		 }
 		
 		 else{
