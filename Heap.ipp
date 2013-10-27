@@ -56,35 +56,29 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
   //TODO
+  //std::get<0>(backingArray[index])>std::get<0>(backingArray[leftChild]) ||
+  //std::get<0>(backingArray[index])>std::get<0>(backingArray[rightChild])
 
-  
 
-  do {
+	 unsigned long leftChild;
+	  unsigned long rightChild;
+	  while(index<numItems && index<arrSize/2){
 
-	  unsigned long leftChild = 2*index +1;
-	  unsigned long rightChild = 2*index+2;
-      unsigned long j = -1;
-      unsigned long r = rightChild;
-      if (r < numItems && std::get<0>(backingArray[r])<std::get<0>(backingArray[index])) {
-        int l = leftChild;
-        if (std::get<0>(backingArray[leftChild])<std::get<0>(backingArray[rightChild])) {
-          j = l;
-        } else {
-          j = r;
-        }
-      } else {
-        int l = leftChild;
-        if (l < numItems && std::get<0>(backingArray[leftChild])<std::get<0>(backingArray[index])) {
-          j = l;
-        }
-      }
-      if (j >= 0) {
-		backingArray[index].swap(backingArray[j]);
-	  } 
-      index = j;
+		 leftChild = 2*index + 1;
+	     rightChild = 2*index + 2;
 
-   } while (index >= 0);
-  
+	     if(std::get<0>(backingArray[leftChild])<std::get<0>(backingArray[rightChild])){
+			backingArray[index].swap(backingArray[leftChild]);
+			index = leftChild;
+		 }
+		
+		 else{
+			backingArray[index].swap(backingArray[rightChild]);
+			index = rightChild;
+		 }
+	  }
+ 
+
 }
 
 
