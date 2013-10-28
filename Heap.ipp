@@ -2,12 +2,14 @@
 
 template<class Pri, class T>
 Heap<Pri,T>::Heap(){
-  //TODO
+    arrSize = START_SIZE;
+    backingArray= new std::pair <Pri, T>[arrSize];
+    numItems = 0;
 }
 
 template<class Pri, class T>
 Heap<Pri,T>::~Heap(){
-  //TODO
+    delete [] backingArray;
 }
 
 template<class Pri, class T>
@@ -17,7 +19,9 @@ void Heap<Pri,T>::grow(){
 
 template<class Pri, class T>
 void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
-  //TODO
+    backingArray[numItems] = toAdd;
+    numItems++;
+    //if() bubbleUp()
 }
 
 template<class Pri, class T>
@@ -32,13 +36,19 @@ void Heap<Pri,T>::trickleDown(unsigned long index){
 
 template<class Pri, class T>
 std::pair<Pri,T> Heap<Pri,T>::remove(){
-  //TODO
   std::pair<Pri,T> tmp;
+    tmp = backingArray[0];
+    backingArray[0] = backingArray[numItems-1];
+    numItems--;
+    
+    for (unsigned long i = 0; backingArray[i].first > backingArray[(2 * i) + 1].first ; i = (i * 2) + 1){
+        trickleDown(i);
+    }
+    
   return tmp;
 }
 
 template<class Pri, class T>
 unsigned long Heap<Pri,T>::getNumItems(){
-  //TODO
-  return 0;
+  return numItems;
 }
