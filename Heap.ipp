@@ -64,9 +64,12 @@ void Heap<Pri,T>::trickleDown(unsigned long index){
 
 template<class Pri, class T>
 std::pair<Pri,T> Heap<Pri,T>::remove(){
-  //TODO
-  std::pair<Pri,T> tmp;
-  return tmp;
+  
+  std::pair<Pri, T> temp = backingArray[0];
+  backingArray[0] = backingArray[numItems-1];
+  trickleDown(0);
+  return temp;
+  
 }
 
 template<class Pri, class T>
