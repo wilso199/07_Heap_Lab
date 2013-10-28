@@ -56,25 +56,25 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
   //TODO
-  //std::get<0>(backingArray[index])>std::get<0>(backingArray[leftChild]) ||
-  //std::get<0>(backingArray[index])>std::get<0>(backingArray[rightChild])
-
-
-	 unsigned long leftChild;
+	  unsigned long leftChild;
 	  unsigned long rightChild;
-	  while(index<numItems){
+
+	  while((index*2+1)<(numItems-1)){
 
 		 leftChild = 2*index + 1;
 	     rightChild = 2*index + 2;
 		 
+		 // if only one child
+		 if(leftChild==(numItems-1)&& std::get<0>(backingArray[leftChild])<std::get<0>(backingArray[index])){
+			backingArray[index].swap(backingArray[leftChild]);
+		 }
 
-	     if(std::get<0>(backingArray[leftChild])<std::get<0>(backingArray[rightChild])){
+	     if(std::get<0>(backingArray[leftChild])<=std::get<0>(backingArray[rightChild])){
 			backingArray[index].swap(backingArray[leftChild]);
 			index = leftChild;
 			
 		 }
-		
-		 else{
+		else{
 			backingArray[index].swap(backingArray[rightChild]);
 			index = rightChild;
 		 }
