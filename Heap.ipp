@@ -14,19 +14,27 @@ Heap<Pri,T>::~Heap(){
 
 template<class Pri, class T>
 void Heap<Pri,T>::grow(){
-  //TODO
+    if (numItems == arrSize) {
+      std::pair<Pri, T>* tempArr = new std::pair<Pri, T>[arrSize * 2];
+        for (int i = 0; i < arrSize; )
+    }
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
     backingArray[numItems] = toAdd;
+    bubbleUp(numItems);
     numItems++;
-    //if() bubbleUp()
+        
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
-  //TODO
+    
+    while (backingArray[index].first < backingArray[(index - 1) / 2].first){
+        backingArray[index].swap(backingArray[(index - 1) / 2]);
+        //index = (index - 1) / 2;
+    }
 }
 
 template<class Pri, class T>
@@ -36,16 +44,17 @@ void Heap<Pri,T>::trickleDown(unsigned long index){
 
 template<class Pri, class T>
 std::pair<Pri,T> Heap<Pri,T>::remove(){
-  std::pair<Pri,T> tmp;
-    tmp = backingArray[0];
+  std::pair<Pri,T> temp;
+    temp = backingArray[0];
     backingArray[0] = backingArray[numItems-1];
+    //backingArray[numItems-1] = NULL;
     numItems--;
     
     for (unsigned long i = 0; backingArray[i].first > backingArray[(2 * i) + 1].first ; i = (i * 2) + 1){
         trickleDown(i);
     }
     
-  return tmp;
+  return temp;
 }
 
 template<class Pri, class T>
