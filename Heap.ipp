@@ -34,9 +34,7 @@ void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
   if((index-1)/2 >= 0 && backingArray[(index-1)/2].first > backingArray[index].first && index > 0){
-	std::pair<Pri,T> swapper = backingArray[(index-1)/2];
-	backingArray[(index-1)/2] = backingArray[index];
-	backingArray[index] = swapper;
+	backingArray[(index-1)/2].swap(backingArray[index]);
 	if((index-1)/2 > 0)
 	  bubbleUp((index-1)/2);
   }
@@ -44,29 +42,25 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
-  if(2*index + 2 >= numItems && 2*index + 1 < numItems)
-	backingArray[index]=backingArray[2*index+1];
-  else if(2*index+2 < numItems){
-    if(backingArray[2*index+1].first <= backingArray[2*index+2].first){
-	  backingArray[index] = backingArray[2*index+1];
-	  trickleDown(2*index+1);
-    }
-    else if(backingArray[2*index+1].first > backingArray[2*index+2].first){
-  	  backingArray[index] = backingArray[2*index+2];
-	  trickleDown(2*index+2);
-    }
+  if(index*2 + 2 == numItems && backingArray[index].first > backingArray[index*2+1].first){
+	backingArray[index].swap(backingArray[index*2+1]);
   }
-  else{
-    for(int i = index; i < numItems; i++)
-		backingArray[i] = backingArray[i+1];
+  else if(index*2+1 < numItems && index*2+1 < numItems){
+	if(backingArray[index].first > backingArray[index*2+1].first && backingArray[index*2+2].first > backingArray[index*2+1].first){
+		backingArray[index].swap(backingArray[index*2+1]);
+	}
+	else if(backingArray[index].first > backingArray[index*2+2].first && backingArray[index*2+1].first > backingArray[index*2+2].first){
+		backingArray[index].swap(backingArray[index*2+2]);
+	}
   }
 }
 
 template<class Pri, class T>
 std::pair<Pri,T> Heap<Pri,T>::remove(){
   std::pair<Pri,T> tmp = backingArray[0];
-  trickleDown(0);
+  backingArray[0]=backingArray[numItems-1];
   numItems--;
+  trickleDown(0);
   return tmp;
 }
 
