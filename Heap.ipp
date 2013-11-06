@@ -14,7 +14,15 @@ delete[] backingArray;
 
 template<class Pri, class T>
 void Heap<Pri,T>::grow(){
-  //TODO
+ std::pair<Pri,T>* backingArray2= new std::pair<Pri, T>[arrSize*2];
+  
+  for(int i=0; i<=arrSize; i++){
+  backingArray2[i]=backingArray[i];
+  }
+  
+  arrSize=arrSize*2;
+  delete[] backingArray;
+  backingArray=backingArray2;
 }
 
 template<class Pri, class T>
