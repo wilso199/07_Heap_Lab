@@ -3,11 +3,15 @@
 template<class Pri, class T>
 Heap<Pri,T>::Heap(){
   //TODO
+  backingArray = new std::pair<Pri, T>[10];
+  numItems = 0;
+  arrSize = 10;
 }
 
 template<class Pri, class T>
 Heap<Pri,T>::~Heap(){
   //TODO
+  delete[] backingArray;
 }
 
 template<class Pri, class T>
