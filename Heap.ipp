@@ -11,7 +11,7 @@ template<class Pri, class T>
 Heap<Pri,T>::~Heap(){
 delete[] backingArray;
 }
-
+// from book
 template<class Pri, class T>
 void Heap<Pri,T>::grow(){
  std::pair<Pri,T>* backingArray2= new std::pair<Pri, T>[arrSize*2];
@@ -24,22 +24,26 @@ void Heap<Pri,T>::grow(){
   delete[] backingArray;
   backingArray=backingArray2;
 }
-
+//from book
 template<class Pri, class T>
 void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
-  //TODO
+ if (numItems  >= arrSize) grow();
+    
+    backingArray[numItems] = toAdd;
+    bubbleUp(numItems);
+    numItems++;
 }
-
+// from book
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
   //TODO
 }
-
+// from book
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
   //TODO
 }
-
+// from book
 template<class Pri, class T>
 std::pair<Pri,T> Heap<Pri,T>::remove(){
   //TODO
