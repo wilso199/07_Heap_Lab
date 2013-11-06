@@ -36,7 +36,13 @@ void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
 // from book
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
-  //TODO
+  int p = (int)(index-1)/2;
+    while (index > 0 &&  backingArray[index] <backingArray[p]) {
+      backingArray[p].swap(backingArray[index]);
+      index = p;
+      p = (int)(index-1)/2;
+    }
+
 }
 // from book
 template<class Pri, class T>
