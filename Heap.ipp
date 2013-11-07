@@ -15,6 +15,7 @@ Heap<Pri,T>::~Heap(){
 
 template<class Pri, class T>
 void Heap<Pri,T>::grow(){
+    int oldNumItems=numItems;
     std::pair<Pri, T>* newArr = new std::pair<Pri, T>[arrSize*2];
     for (int i=0; i<numItems; i++) {
         newArr[i] = backingArray[i];
@@ -22,7 +23,8 @@ void Heap<Pri,T>::grow(){
         delete[] backingArray;
         backingArray = newArr;
         arrSize=arrSize*2;
-        
+        //not sure if needed.
+    numItems=oldNumItems;
     
     
 }
