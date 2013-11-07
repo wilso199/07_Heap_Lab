@@ -23,20 +23,27 @@ void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
   if ((numItems + 1) > arrSize) {
 	grow();
   }
-  backingArray[numItems+1] = toAdd;
-  bubbleUp(numItems - 1);
+  backingArray[numItems] = toAdd;
   numItems++;
+  bubbleUp(numItems - 1);
+ 
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
   //TODO
-	/*int p = (index -1)/2;
-	while (index > 0 && compare(backingArray[index],backingArray[p]) < 0){
-		backingArray.swap(index,p);
+	int p = (index - 1)/2;
+	
+	while (index > 0 && (backingArray[index].first < backingArray[p].first)) {
+		//swap i and p
+		std::pair <Pri, T> temp = backingArray[index];
+		backingArray[index].first = backingArray[p].first;
+		backingArray[index].second = backingArray[p].second;
+		backingArray[p].first = temp.first;
+		backingArray[p].second = temp.second;
 		index = p;
-		p = parent(index);
-	}*/
+		p = (index - 1)/2;
+	}
 }
 
 template<class Pri, class T>
