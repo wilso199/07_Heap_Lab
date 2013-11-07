@@ -25,7 +25,10 @@ Questions
 2. This requirement works. Memory is not leaked.
 
 #### 2. Exercises 10.1 and 10.2 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
-TODO
+10.1
+	To add 7 to the end of the heap in 10.2, 7 is first added as a left child of 16. Since 16's priority is greater than 7's some updating in the tree needs to be done. 7 and 16 will be switched so that this heap has correct heap order. Then 7 will be compared to 6 and since 6 has a smaller priority than 7, this heap now has correct heap order.
+10.2
+	
 
 #### 3. Exercise 10.4 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
 
