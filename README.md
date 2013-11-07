@@ -28,6 +28,8 @@ Questions
 TODO
 
 #### 3. Exercise 10.4 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
-
+parent= (index-1)/2
+right=2index+2
+left=2index+1
 #### 4. What is one question that confused you about this exercise, or one piece of advice you would share with students next semester?
 I actually didn't have any problems with this exercise oddly. I thought the book was really helpful, tell the other students to use the book and read it a lot for this one.
