@@ -33,6 +33,9 @@ Questions
 	To remove 8 in 10.3, 8 is switched with the last node in the array which is 93 and is removed. Now 93 is out of order. 93 is compared to its right child of 16 but since 93's left child of 9 is smaller than 16, 93 and 9 are swapped. Now 93's two children are 17 and 26. Since 17 is smaller than 26, 17 adn 93 are swapped. Now 93's two children are 19 and 69, since 19 is smaller than 69, 93 and 16 are swapped. Now the heap is in the correct heap order.
 
 #### 3. Exercise 10.4 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
+	left child = 2*parent + 1
+	right child = 2*parent + 2
+	parent = (child - 1)/2
 
 #### 4. What is one question that confused you about this exercise, or one piece of advice you would share with students next semester?
 One thing about this exercise that confused me was how to access the priority and T value. I would give the advice to students next semester that the way to access these is through .first and .second respectively
