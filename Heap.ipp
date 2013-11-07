@@ -1,6 +1,7 @@
 #include <string>
 
-// Nick Contini told me how to access the priority value and the T value using .first and .second
+// Nick Contini told me how to access the priority value and the T value 
+// using .first and .second
 
 template<class Pri, class T>
 Heap<Pri,T>::Heap(){
