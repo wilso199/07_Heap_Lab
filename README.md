@@ -18,8 +18,8 @@ Questions
 
 #### 1. Which of the above requirements work, and which do not? For each requirement, write a brief response.
 
-1. TODO
-2. TODO
+1. add, remove O(logn), grow O(n).
+2. deconstructor deletes backingArray, I believe I am not leaking memory. (Do I need a delete call in the remove function to accomplish that?)
 
 #### 2. Exercises 10.1 and 10.2 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
 TODO
@@ -28,4 +28,4 @@ TODO
 
 #### 4. What is one question that confused you about this exercise, or one piece of advice you would share with students next semester?
 
-TODO
+it is a good idea to test your own code, and not just leave it to the pre-made tests.
