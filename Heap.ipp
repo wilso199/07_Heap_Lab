@@ -19,7 +19,8 @@ void Heap<Pri,T>::grow(){
 
 template<class Pri, class T>
 void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
-  //TODO
+	backingArray[numItems - 1] = toAdd;
+	numItems++; 
 }
 
 template<class Pri, class T>
