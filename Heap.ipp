@@ -2,17 +2,26 @@
 
 template<class Pri, class T>
 Heap<Pri,T>::Heap(){
-  //TODO
+  backingArray = new std::pair<Pri,T>[START_SIZE];
+  arrSize = START_SIZE;
 }
 
 template<class Pri, class T>
 Heap<Pri,T>::~Heap(){
-  //TODO
+  delete backingArray;
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::grow(){
-  //TODO
+	replacement = new std::pair<Pri,T>[arrSize*2];
+	if(replacement==NULL)
+          throw std::string("You have run out of memory, sorry.");
+
+	for (unsigned long i=0; i<numItems; i++)
+          replacement[i] = backingArray[i];
+
+	        delete[] backingArray;
+        backingArray = replacement;  
 }
 
 template<class Pri, class T>
