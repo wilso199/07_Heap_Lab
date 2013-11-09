@@ -9,7 +9,7 @@ Heap<Pri,T>::Heap(){
 
 template<class Pri, class T>
 Heap<Pri,T>::~Heap(){
-  delete backingArray;
+  delete[] backingArray;
 }
 
 template<class Pri, class T>
@@ -33,7 +33,7 @@ void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){//items are just added one by one 
 }
 
 template<class Pri, class T>
-void Heap<Pri,T>::bubbleUp(unsigned long index){
+void Heap<Pri,T>::bubbleUp(unsigned long index){//yeah sorry I don't recurse unless it is a severely complicated case.
   while(index>0){
 	  if(backingArray[index].first < backingArray[(index-1)/2].first){ //compares internal priorities
 		  Pri tempPri = backingArray[index].first;
@@ -50,8 +50,8 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 }
 
 template<class Pri, class T>
-void Heap<Pri,T>::trickleDown(unsigned long index){
-    while(index<numItems){
+void Heap<Pri,T>::trickleDown(unsigned long index){//yeah sorry I don't recurse unless it is a severely complicated case.
+    while(index < (unsigned long)numItems){
 	  if(backingArray[index].first > backingArray[index*2 +1].first){ //compares internal priorities of parent and left child
 		  Pri tempPri = backingArray[index].first;
 		  T tempT = backingArray[index].second;
@@ -75,8 +75,13 @@ void Heap<Pri,T>::trickleDown(unsigned long index){
 
 template<class Pri, class T>
 std::pair<Pri,T> Heap<Pri,T>::remove(){
-  //TODO
-  std::pair<Pri,T> tmp;
+  std::pair<Pri,T> tmp = backingArray[0];
+  //now change top contents only
+  backingArray[0].second = backingArray[numItems-1].second;
+  backingArray[0].first = backingArray[numItems-1].first;
+  //delete backingArray[numItems-1]; //no need to delete individual indexes because they will be overwritten by add() or destructed when ~Heap is called.
+  numItems--;
+  trickleDown(0);
   return tmp;
 }
 
