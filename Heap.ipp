@@ -106,8 +106,8 @@ std::pair<Pri,T> Heap<Pri,T>::remove(){
 	backingArray[0].first = backingArray[numItems-1].first;//swap bottom priority contents to the top
 	backingArray[0].second = backingArray[numItems-1].second;
 
-	numItems--;
 	trickleDown(0);
+	numItems--;
 	return tmp;
 }
 
