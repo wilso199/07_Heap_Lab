@@ -18,7 +18,7 @@ void Heap<Pri,T>::grow(){
 	if(replacement==NULL)
           throw std::string("You have run out of memory, sorry.");
 
-	for (int i=0; i<numItems; i++)
+	for(int i=0; i<numItems; i++)
           replacement[i] = backingArray[i];
 
 	delete[] backingArray;
@@ -54,26 +54,44 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){//yeah sorry I don't recurse unl
 
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){//yeah sorry I don't recurse unless it is a severely complicated case.
-    while(index < (unsigned long)numItems){
-		if((backingArray[index].first < backingArray[index*2 +1].first) && (backingArray[index].first < backingArray[(index+1)*2].first))
-			return;
-		if(backingArray[index*2 +1].first < backingArray[(index+1)*2].first){ //compare child priorities
-			Pri tempPri = backingArray[index].first;
-			T tempT = backingArray[index].second;
-			backingArray[index].first = backingArray[index*2 +1].first;
-			backingArray[index].second = backingArray[index*2 +1].second;
-			backingArray[index*2 +1].first = tempPri;
-			backingArray[index*2 +1].second = tempT;
-			index=index*2 +1; //integer division allows this to work for both cases of x.0 and x.5 results due to rounding down.
-		}else{
-			Pri tempPri = backingArray[index].first;
-			T tempT = backingArray[index].second;
-			backingArray[index].first = backingArray[(index+1)*2].first;
-			backingArray[index].second = backingArray[(index+1)*2].second;
-			backingArray[(index+1)*2].first = tempPri;
-			backingArray[(index+1)*2].second = tempT;
-		}
+	while((int)((index+1)*2) < numItems){
+		if(backingArray[index*2 +1].first < backingArray[(index+1)*2].first){
+			if(backingArray[index].first > backingArray[index*2 +1].first){
+				Pri tempPri = backingArray[index].first;
+				T tempT = backingArray[index].second;
+				backingArray[index].first = backingArray[index*2 +1].first;
+				backingArray[index].second = backingArray[index*2 +1].second;
+				backingArray[index*2 +1].first = tempPri;
+				backingArray[index*2 +1].second = tempT;
+				index = index*2 +1;
+			}//if priority of top node is not greater than the lesser of the two children, then do nothing
+			else
+				return;
+		}else{ /*outter if*/
+			if(backingArray[index].first > backingArray[(index+1) *2].first){
+				Pri tempPri = backingArray[index].first;
+				T tempT = backingArray[index].second;
+				backingArray[index].first = backingArray[(index+1) *2].first;
+				backingArray[index].second = backingArray[(index+1) *2].second;
+				backingArray[(index+1) *2].first = tempPri;
+				backingArray[(index+1) *2].second = tempT;
+				index = (index+1)*2;
+			}//if priority of top node is not greater than the lesser of the two children, then do nothing
+			else
+				return;
+		}//end else
 	}//end while
+
+	if(!((int)index*2 +1 < numItems-1))
+		return;
+	if(backingArray[index].first > backingArray[index*2 +1].first){
+		Pri tempPri = backingArray[index].first;
+		T tempT = backingArray[index].second;
+		backingArray[index].first = backingArray[index*2 +1].first;
+		backingArray[index].second = backingArray[index*2 +1].second;
+		backingArray[index*2 +1].first = tempPri;
+		backingArray[index*2 +1].second = tempT;
+	}//end if
 }
 
 template<class Pri, class T>
@@ -82,19 +100,14 @@ std::pair<Pri,T> Heap<Pri,T>::remove(){
 		throw std::string("Please stop trying to remove from an empty heap.");
 
 	std::pair<Pri,T> tmp;
-	//Pri tempPri = backingArray[0].first;
-	//T tempT = backingArray[0].second;
 	tmp.first = backingArray[0].first;
 	tmp.second = backingArray[0].second;
+
 	backingArray[0].first = backingArray[numItems-1].first;//swap bottom priority contents to the top
 	backingArray[0].second = backingArray[numItems-1].second;
-	//backingArray[numItems-1].first = tempPri;
-	//backingArray[numItems-1].second = tempT;
-	//tmp.first = backingArray[numItems-1].first;
-	//tmp.second = backingArray[numItems-1].second;
-	backingArray[numItems-1].first = INT_MAX; //this prevents
-	trickleDown(0);
+
 	numItems--;
+	trickleDown(0);
 	return tmp;
 }
 
