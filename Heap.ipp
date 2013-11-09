@@ -28,7 +28,7 @@ void Heap<Pri,T>::grow(){
 template<class Pri, class T>
 void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){//items are just added one by one in order.
   backingArray[numItems] = toAdd; //1st gets added at [0], 2nd gets added at [1], etc.
-  bubbleUp(numItems);
+  bubbleUp(numItems); //because bubbleUp is called before numItems++, we can get away with not reducing the index by 1.
   numItems++;
 }
 
@@ -42,8 +42,10 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 		  backingArray[index].first = backingArray[(index-1)/2].first;
 		  backingArray[(index-1)/2].first = tempPri;
 		  backingArray[(index-1)/2].second = tempT;
-		  index=(index-1)/2;
+		  index=(index-1)/2; //integer division allows this to work for both cases of x.0 and x.5 results due to rounding down.
 	  }
+	  else
+		  return;
   }
 }
 
