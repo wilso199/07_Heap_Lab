@@ -4,6 +4,7 @@ template<class Pri, class T>
 Heap<Pri,T>::Heap(){
   backingArray = new std::pair<Pri,T>[START_SIZE];
   arrSize = START_SIZE;
+  numItems=0;
 }
 
 template<class Pri, class T>
@@ -25,13 +26,25 @@ void Heap<Pri,T>::grow(){
 }
 
 template<class Pri, class T>
-void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
-  //TODO
+void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){//items are just added one by one in order.
+  backingArray[numItems] = toAdd; //1st gets added at [0], 2nd gets added at [1], etc.
+  bubbleUp(numItems);
+  numItems++;
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
-  //TODO
+  while(index>0){
+	  if(backingArray[index].first < backingArray[(index-1)/2].first){ //compares internal priorities
+		  Pri tempPri = backingArray[index].first;
+		  T tempT = backingArray[index].second;
+		  backingArray[index].second = backingArray[(index-1)/2].second;
+		  backingArray[index].first = backingArray[(index-1)/2].first;
+		  backingArray[(index-1)/2].first = tempPri;
+		  backingArray[(index-1)/2].second = tempT;
+		  index=(index-1)/2;
+	  }
+  }
 }
 
 template<class Pri, class T>
@@ -48,6 +61,5 @@ std::pair<Pri,T> Heap<Pri,T>::remove(){
 
 template<class Pri, class T>
 unsigned long Heap<Pri,T>::getNumItems(){
-  //TODO
-  return 0;
+  return numItems;
 }
