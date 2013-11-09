@@ -23,12 +23,20 @@ void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
 		grow();
 	}
 	backingArray[numItems] = toAdd;
+	bubbleUp(static_cast<unsigned long>(numItems));
 	numItems++; 
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
-  //TODO
+	int mom = (numItems - 1)/2;
+	if(numItems != 0){
+		while(index != 0 && backingArray[mom].first >
+			backingArray[numItems].first){
+			index = static_cast<unsigned long>(mom);
+			mom = (mom - 1) / 2;
+			}
+	}
 }
 
 template<class Pri, class T>
