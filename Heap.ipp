@@ -51,7 +51,26 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
-  //TODO
+    while(index<numItems){
+	  if(backingArray[index].first > backingArray[index*2 +1].first){ //compares internal priorities of parent and left child
+		  Pri tempPri = backingArray[index].first;
+		  T tempT = backingArray[index].second;
+		  backingArray[index].second = backingArray[index*2 +1].second;
+		  backingArray[index].first = backingArray[index*2 +1].first;
+		  backingArray[index*2 +1].first = tempPri;
+		  backingArray[index*2 +1].second = tempT;
+		  index=index*2 +1; //integer division allows this to work for both cases of x.0 and x.5 results due to rounding down.
+	  } else if(backingArray[index].first > backingArray[(index+1)*2].first){ //compares internal priorities of parent and right child
+		  Pri tempPri = backingArray[index].first;
+		  T tempT = backingArray[index].second;
+		  backingArray[index].second = backingArray[(index+1)*2].second;
+		  backingArray[index].first = backingArray[(index+1)*2].first;
+		  backingArray[(index+1)*2].first = tempPri;
+		  backingArray[(index+1)*2].second = tempT;
+	  }
+	  else
+		  return;
+  }
 }
 
 template<class Pri, class T>
