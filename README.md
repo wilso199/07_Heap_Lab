@@ -21,11 +21,11 @@ Questions
 
 #### 1. Which of the above requirements work, and which do not? For each requirement, write a brief response.
 
-1. TODO
-2. TODO
+1. Add and remove both take O(log n). Each one calls either bubbleUp() or trickleDown(), which take O(log n) time. BubbleUp and TrickleDown take O(log n) time because they look at, if viewed as a tree, down a series of edges,  which should take O(log n) time.
+2. It does not leak memory, as in grow(), delete is called to delete the backingArray, as well as in the deconstructor. Because the std::pairs are not dymanically allocated, they do not leak memory and delete does not need to be called.
 
 #### 2. Exercises 10.1 and 10.2 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
-TODO
+	When 7 is added, it is added, at first, to the last open space in the heap. Then, if 7 is smaller than it's parent, it switches places with the parent, 
 
 #### 3. Exercise 10.4 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
 
