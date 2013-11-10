@@ -41,7 +41,8 @@ Questions
 	17, as 17 is smaller than 26. Finally, the 93 swaps with it's left child, now 19, placing 93 back on the last row. This preserves the heap order.
 	
 #### 3. Exercise 10.4 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
-
+	The index's of i's parent can be found by (index - 1))/d, where d is the number of children per internal node. To find each of the children of a particular node, you use d*index + (numOfWantedChild), where d is the number of children per internal node, and numOfWantedChild
+	is the number of the deisred child (first child would be 1, second child would be 2, etc.)
 #### 4. What is one question that confused you about this exercise, or one piece of advice you would share with students next semester?
 
-TODO
+	Watch out for bad pointers. I had several of them, for reasons I am not really sure of. I eventually fixed the problem, but the bad pointers caused me a lot of problems when I was first starting to code the bubbleUp() and trickleDown() methods.
