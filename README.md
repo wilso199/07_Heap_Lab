@@ -25,9 +25,17 @@ Questions
 2. TODO
 
 #### 2. Exercises 10.1 and 10.2 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
-TODO
+
+Hand-drawn illustrations in attached PDF files.
 
 #### 3. Exercise 10.4 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
+
+For any d-ary tree:
+Children :
+	for (int x: [1, 2, 3…d]) {
+	  child(i) = di + x;
+Parent :
+	parent(i) = floor((i-1)/d);
 
 #### 4. What is one question that confused you about this exercise, or one piece of advice you would share with students next semester?
 
