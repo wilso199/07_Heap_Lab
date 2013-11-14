@@ -31,14 +31,30 @@ void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
   }
   else {
 	  backingArray[numItems] = toAdd;
-	  numItems++;
 	  bubbleUp(numItems);
+	  numItems++;
+	  
   }
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
-  //TODO
+  int parent = (index-1)/2;
+  int leftChild = ((2 * index) + 1);
+  int rightChild = ((2 * index) + 2);
+
+  for (int i = 0; i < numItems; i++) {
+	  if (parent > index) {
+		  int temp = parent;
+		  backingArray[parent] = backingArray[leftChild];
+		  backingArray[leftChild] = backingArray[temp];
+	  }
+	  if (parent > rightChild) {
+		  int temp = parent;
+		  backingArray[parent] = backingArray[rightChild];
+		  backingArray[rightChild] = backingArray[parent];
+	  }
+  }
 }
 
 template<class Pri, class T>
