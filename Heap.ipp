@@ -64,8 +64,13 @@ void Heap<Pri,T>::trickleDown(unsigned long index){
 
 template<class Pri, class T>
 std::pair<Pri,T> Heap<Pri,T>::remove(){
-  //TODO
-  std::pair<Pri,T> tmp;
+  if (numItems == NULL) {
+	  throw std::string("No items in queue to remove!");
+  }
+  std::pair<Pri,T> tmp = backingArray[0]; 
+  backingArray[0] = backingArray[numItems--];
+  numItems--;
+  trickleDown(0);
   return tmp;
 }
 
