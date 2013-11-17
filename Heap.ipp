@@ -33,6 +33,7 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 	if(numItems != 0){
 		while(index != 0 && backingArray[mom].first >
 			backingArray[numItems].first){
+			swap(backingArray[mom], backingArray[numItems]);
 			index = static_cast<unsigned long>(mom);
 			mom = (mom - 1) / 2;
 			}
@@ -45,8 +46,13 @@ void Heap<Pri,T>::trickleDown(unsigned long index){
 	while(kidLeft <= static_cast<unsigned long>(numItems)){
 		if(2*index + 1 == numItems || backingArray[kidLeft].first <=
 		 backingArray[kidLeft+1].first){
-			swap();
+			swap(backingArray[index], backingArray[kidLeft]);
+			index = kidLeft;
 		} 
+		else{
+			swap(backingArray[index], backingArray[kidLeft+1]);
+			index = kidLeft + 1;
+		}
 	}
 }
 
