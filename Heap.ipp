@@ -39,44 +39,45 @@ void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
 
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
-	int parent = (index-1)/2;
-	int leftChild = ((2 * index) + 1);
-	int rightChild = ((2 * index) + 2);
-
-	for (int i = 0; i < numItems; i++) {
-		if (parent > index) {
-			int temp = parent;
+	std::pair<Pri,T> tempParent = backingArray[0]; 
+	int count = 0;
+	int parent = (index - 1) /2;
+	int leftChild = ((2 * parent) + 1);
+	int rightChild = ((2 * parent) + 2);
+	while (numItems > count) {
+		if (backingArray[parent] > backingArray[leftChild]) {
 			backingArray[parent] = backingArray[leftChild];
-			backingArray[leftChild] = backingArray[temp];
+			backingArray[leftChild] = tempParent;
 		}
-		if (parent > rightChild) {
-			int temp = parent;
+		if (backingArray[parent] > backingArray[rightChild]) {
+			tempParent = backingArray[0];
 			backingArray[parent] = backingArray[rightChild];
-			backingArray[rightChild] = backingArray[parent];
+			backingArray[rightChild] = tempParent;
 		}
 	}	
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
-
-	/*
-	int parent = (index-1)/2;
+	std::pair<Pri,T> tempParent = backingArray[0]; 
+	int count = 0;
+	int parent = 0; 
 	int leftChild = ((2 * index) + 1);
-	int rightChild = ((2 * index) + 2);
-	for (int i = 0; i < numItems; i++) {
-		if (leftChild < parent) {
-			int temp = leftChild;
-			backingArray[leftChild] = backingArray[parent];
-			backingArray[parent] = backingArray[temp];
+	int	rightChild = ((2 * index) + 2);
+
+	while (numItems > count) {
+		if (backingArray[parent] > backingArray[leftChild]) { 
+			backingArray[parent] = backingArray[leftChild]; 
+			backingArray[leftChild] = tempParent;
 		}
-		if (rightChild > parent) {
-			int temp = rightChild;
-			backingArray[rightChild] = backingArray[parent];
-			backingArray[parent] = backingArray[temp];
+		if (backingArray[parent] > backingArray[rightChild]) {
+			tempParent = backingArray[0];
+			backingArray[parent] = backingArray[rightChild];
+			backingArray[rightChild] = tempParent;
+
 		}
-	}
-	*/
+		count++;
+	} 
 }
 
 
@@ -85,11 +86,13 @@ std::pair<Pri,T> Heap<Pri,T>::remove(){
 	if (numItems == NULL) {
 		throw std::string("No items in queue to remove!");
 	}
-	std::pair<Pri,T> tmp = backingArray[0]; 
-	backingArray[0] = backingArray[numItems--];
+	std::pair<Pri,T> temp = backingArray[0]; 
+	backingArray[0] = backingArray[numItems-1]; // Need to fix
 	numItems--;
 	trickleDown(0);
-	return tmp;
+	// return temp "Not sure if we should be returning temp or backingArray"
+	// I was originally returning temp. 
+	return backingArray[0];
 }
 
 template<class Pri, class T>
