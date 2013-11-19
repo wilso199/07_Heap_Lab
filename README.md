@@ -108,6 +108,14 @@ Inserting 3
 
 #### 3. Exercise 10.4 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
 
+********************************************************************************
+
+Index of i's parent is: (i-1)/d
+
+Index of each of i's d children: 2*i + k (k = 1,2,3,...,d)
+
+********************************************************************************
+
 #### 4. What is one question that confused you about this exercise, or one piece of advice you would share with students next semester?
 
 In `remove()` method, I have to decrement `numItems` before calling `trickDown()`. It took me more than one hours to find this bug.
