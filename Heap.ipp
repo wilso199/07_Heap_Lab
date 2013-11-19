@@ -22,7 +22,8 @@ void Heap<Pri,T>::grow(){
           replacement[i] = backingArray[i];
 
 	delete[] backingArray;
-    backingArray = replacement;  
+    backingArray = replacement;
+    arrSize *= 2;
 }
 
 template<class Pri, class T>
