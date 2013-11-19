@@ -33,7 +33,7 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 	if(numItems != 0){
 		while(index != 0 && backingArray[mom].first >
 			backingArray[numItems].first){
-//			swap(backingArray[mom], backingArray[numItems]);
+			swap(backingArray[mom], backingArray[numItems]);
 			index = static_cast<unsigned long>(mom);
 			mom = (mom - 1) / 2;
 			}
@@ -42,33 +42,34 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
-//	unsigned long kidLeft = 2*index+1;	
-//	while(kidLeft <= static_cast<unsigned long>(numItems)){
-//		if(2*index + 1 == numItems || backingArray[kidLeft].first <=
-//		 backingArray[kidLeft+1].first){
-//			swap(backingArray[index], backingArray[kidLeft]);
-//			index = kidLeft;
-//		} 
-//		else{
-//			swap(backingArray[index], backingArray[kidLeft+1]);
-//			index = kidLeft + 1;
-//		}
-//	}
+	unsigned long kidLeft = 2*index+1;	
+	while(kidLeft <= static_cast<unsigned long>(numItems-1)){
+		if(2*index + 1 == numItems || backingArray[kidLeft].first <=
+		 backingArray[kidLeft+1].first){
+			swap(backingArray[index], backingArray[kidLeft]);
+			index = kidLeft;
+		} 
+		else{
+			swap(backingArray[index], backingArray[kidLeft+1]);
+			index = kidLeft+1;
+		}
+		kidLeft = 2*index+1;
+	}
 }
 
 template<class Pri, class T>
 std::pair<Pri,T> Heap<Pri,T>::remove(){
-//  if(numItems == 0){
-//	throw (std::string) "No item to remove.";
-//  }
-//  else{
-//	std::pair<Pri, T> temp = backingArray[numItems];
-//	backingArray[numItems] = backingArray[0];
-//	backingArray[0] = temp;
-//	trickleDown(0);
+  if(numItems == 0){
+	throw (std::string) "No item to remove.";
+  }
+  else{
+	std::pair<Pri, T> temp = backingArray[numItems-1];
+	backingArray[numItems-1] = backingArray[0];
+	backingArray[0] = temp;
+	trickleDown(0);
 //	backingArray[numItems].erase(backingArray[numItems.first]);
-//	numItems--;
-//  }
+	numItems--;
+  }
 	std::pair<Pri,T> tmp;
 	return tmp;
 }
