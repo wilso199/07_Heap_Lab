@@ -25,7 +25,49 @@ Questions
 2.Memory is not leaking. 
 
 #### 2. Exercises 10.1 and 10.2 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
-TODO
+
+*******************************************************************************
+10.1:
+
+Inserting 7
+
+1.Place 7 at location a[n], and increment n.
+
+4,9,6,17,26,8,16,19,69,32,93,55,50,`7`
+
+2.Compare 7 with its parent 16, 7 < 16. Swap 7 and 16.
+
+4,9,6,17,26,8,`7`,19,69,32,93,55,50,16
+
+3.Compare 7 with its current parent 6, 7 > 6. Done.
+
+At the end of Figure is:
+
+4,9,6,17,26,8,`7`,19,69,32,93,55,50,16
+
+
+Inserting 3
+
+1.place 3 at location a[n] and increment n.
+
+4,9,6,17,26,8,7,19,69,32,93,55,50,16,`3`
+
+2.Compare 3 with its parent 7, 3 < 7. Swap 3 and 7.
+
+4,9,6,17,26,8,`3`,19,69,32,93,55,50,16,7
+
+3.Compare 3 with its current parent 6, 3 < 6. Swap.
+
+4,9,`3`,17,26,8,6,18,69,32,93,55,50,16,7
+
+4.Compare 3 with its current parent 4, 3 < 4. Swap.
+
+`3`,9,4,17,26,8,6,18,69,32,93,55,50,16,7   Done.
+
+********************************************************************************
+
+
+
 
 #### 3. Exercise 10.4 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
 
