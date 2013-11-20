@@ -14,7 +14,14 @@ Heap<Pri,T>::~Heap(){
 
 template<class Pri, class T>
 void Heap<Pri,T>::grow(){
-  //TODO
+	std::pair<Pri, T>* temp = new std::pair<Pri, T>[arrSize * 2];
+	for(int i = 0; i < arrSize; i++){
+		temp[i] = backingArray[i];
+	}
+	arrSize = arrSize * 2;
+	std::pair<Pri, T>* removal = backingArray;
+	backingArray = temp;
+	delete[] removal;	
 }
 
 template<class Pri, class T>

@@ -2,7 +2,7 @@
 #include <utility>
 
 //This should be the initial arrSize
-#define START_SIZE 10
+#define START_SIZE 1
 
 /*
  * This is a priority queue, which means that as items are removed in order
