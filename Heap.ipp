@@ -42,8 +42,8 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
-	unsigned long kidLeft = 2*index+1;	
-	while(kidLeft <= static_cast<unsigned long>(numItems-1)){
+	int kidLeft = 2*index+1; 	
+	while(kidLeft <= numItems-1){
 		if(kidLeft == numItems-1 || backingArray[kidLeft].first <=
 		 backingArray[kidLeft+1].first){
 			swap(backingArray[index], backingArray[kidLeft]);

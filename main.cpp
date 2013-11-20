@@ -54,7 +54,7 @@ void testHeap(){
     std::cout << "ERROR: Expected key 7, but got " << item.first << std::endl;
     exit(1);
   } else {
-    std::cout << "SUCCESS: Found item 7 as expected." << std::endl;
+	  std::cout << "SUCCESS: Found item 7 as expected." << std::endl;
   }
 
   item = myHeap.remove();
