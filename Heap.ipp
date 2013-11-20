@@ -31,9 +31,10 @@ void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
 	}
 	else {
 		backingArray[numItems] = toAdd;
-		bubbleUp(numItems);
 		numItems++;
-
+		if (numItems > 1) {
+			bubbleUp(numItems - 1);
+		}
 	}
 }
 
@@ -44,40 +45,40 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 	int parent = (index-1)/2;
 	int leftChild = ((2 * parent) + 1);
 	int rightChild = ((2 * parent) + 2);
-
-		for (int i = 0; i < numItems; i++) {
-			if (backingArray[parent] > backingArray[index]) {
-				backingArray[parent] = backingArray[leftChild];
-				backingArray[leftChild] = tempParent;
-			}
-			if (backingArray[parent] > backingArray[rightChild]) {
-				tempParent = backingArray[0];
-				backingArray[parent] = backingArray[rightChild];
-				backingArray[rightChild] = tempParent;
+	for (int i = 0; i < numItems; i++) {
+		if (backingArray[parent] > backingArray[index]) {
+			backingArray[parent] = backingArray[leftChild];
+			backingArray[leftChild] = tempParent;
+		}
+		if (backingArray[parent] > backingArray[rightChild]) {
+			tempParent = backingArray[0];
+			backingArray[parent] = backingArray[rightChild];
+			backingArray[rightChild] = tempParent;
 		}        
 	}
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
-
-	/*
-	int parent = (index-1)/2;
-	int leftChild = ((2 * index) + 1);
-	int rightChild = ((2 * index) + 2);
+	std::pair<Pri,T> tempChild = backingArray[0];
+	int parent = 0;
+	int leftChild = ((2 * parent) + 1);
+	int rightChild = ((2 * parent) + 2);
 	for (int i = 0; i < numItems; i++) {
-	if (leftChild < parent) {
-	int temp = leftChild;
-	backingArray[leftChild] = backingArray[parent];
-	backingArray[parent] = backingArray[temp];
+		if (backingArray[leftChild] < backingArray[parent]) {
+			tempChild = backingArray[leftChild];
+			backingArray[leftChild] = backingArray[parent];
+			backingArray[parent] = tempChild;
+		}
+		else if (backingArray[rightChild] < backingArray[parent]) {
+			tempChild = backingArray[rightChild]; 
+			backingArray[rightChild] = backingArray[parent];
+			backingArray[parent] = tempChild;
+			rightChild++;
+			
+		}
+		parent = parent++;
 	}
-	if (rightChild > parent) {
-	int temp = rightChild;
-	backingArray[rightChild] = backingArray[parent];
-	backingArray[parent] = backingArray[temp];
-	}
-	}
-	*/
 }
 
 
