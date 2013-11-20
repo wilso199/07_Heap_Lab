@@ -44,7 +44,7 @@ template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
 	unsigned long kidLeft = 2*index+1;	
 	while(kidLeft <= static_cast<unsigned long>(numItems-1)){
-		if(2*index + 1 == numItems || backingArray[kidLeft].first <=
+		if(kidLeft == numItems-1 || backingArray[kidLeft].first <=
 		 backingArray[kidLeft+1].first){
 			swap(backingArray[index], backingArray[kidLeft]);
 			index = kidLeft;
@@ -63,15 +63,13 @@ std::pair<Pri,T> Heap<Pri,T>::remove(){
 	throw (std::string) "No item to remove.";
   }
   else{
-	std::pair<Pri, T> temp = backingArray[numItems-1];
-	backingArray[numItems-1] = backingArray[0];
-	backingArray[0] = temp;
-	trickleDown(0);
-//	backingArray[numItems].erase(backingArray[numItems.first]);
+	std::pair<Pri, T> temp = backingArray[0];
+	backingArray[0] = backingArray[numItems-1];
+	backingArray[numItems-1] = temp;
 	numItems--;
+	trickleDown(0);
+	return temp;
   }
-	std::pair<Pri,T> tmp;
-	return tmp;
 }
 
 template<class Pri, class T>
