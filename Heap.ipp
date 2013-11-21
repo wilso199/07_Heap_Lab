@@ -50,15 +50,13 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 			backingArray[parent] = backingArray[index];
 			backingArray[leftChild] = tempParent;
 		}
-		/*
-		if (numItems > 2) {
-		 if (backingArray[parent] > backingArray[rightChild]) {
-			tempParent = backingArray[0];
-			backingArray[parent] = backingArray[rightChild];
-			backingArray[rightChild] = tempParent;
-		}   
+		else if (numItems > 3) {
+			if (backingArray[parent] > backingArray[index]) {
+				tempParent = backingArray[parent];
+				backingArray[parent] = backingArray[index];
+				backingArray[index] = tempParent;
+			}   
 		}
-		*/
 	}
 }
 
@@ -79,7 +77,7 @@ void Heap<Pri,T>::trickleDown(unsigned long index){
 			backingArray[rightChild] = backingArray[parent];
 			backingArray[parent] = tempChild;
 			rightChild++;
-			
+
 		}
 		parent = parent++;
 	}
