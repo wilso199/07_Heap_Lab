@@ -47,14 +47,18 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 	int rightChild = ((2 * parent) + 2);
 	for (int i = 0; i < numItems; i++) {
 		if (backingArray[parent] > backingArray[index]) {
-			backingArray[parent] = backingArray[leftChild];
+			backingArray[parent] = backingArray[index];
 			backingArray[leftChild] = tempParent;
 		}
-		if (backingArray[parent] > backingArray[rightChild]) {
+		/*
+		if (numItems > 2) {
+		 if (backingArray[parent] > backingArray[rightChild]) {
 			tempParent = backingArray[0];
 			backingArray[parent] = backingArray[rightChild];
 			backingArray[rightChild] = tempParent;
-		}        
+		}   
+		}
+		*/
 	}
 }
 
