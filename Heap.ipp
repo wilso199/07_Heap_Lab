@@ -40,17 +40,18 @@ void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
 
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
-	std::pair<Pri,T> tempParent = backingArray[0]; 
-	int count = 0;
 	int parent = (index-1)/2;
+	std::pair<Pri,T> tempParent = backingArray[parent]; 
+	int count = 0;
+	
 	int leftChild = ((2 * parent) + 1);
 	int rightChild = ((2 * parent) + 2);
 	for (int i = 0; i < numItems; i++) {
 		if (backingArray[parent] > backingArray[index]) {
 			backingArray[parent] = backingArray[index];
-			backingArray[leftChild] = tempParent;
+			backingArray[rightChild] = tempParent;
 		}
-		else if (numItems > 3) {
+		else if (numItems >= 3) {
 			if (backingArray[parent] > backingArray[index]) {
 				tempParent = backingArray[parent];
 				backingArray[parent] = backingArray[index];
