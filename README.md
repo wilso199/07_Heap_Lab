@@ -26,7 +26,12 @@ Questions
 
 #### 2. Exercises 10.1 and 10.2 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
 
-Hand-drawn illustrations in attached PDF files.
+10.1
+	http://t.co/hvxNb5Uv1D
+	http://t.co/UkK82ZPNCY
+10.2
+	http://t.co/yCjW4Uwvwb
+	http://t.co/uj8F6YAWEc
 
 #### 3. Exercise 10.4 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
 
@@ -39,4 +44,4 @@ Parent :
 
 #### 4. What is one question that confused you about this exercise, or one piece of advice you would share with students next semester?
 
-TODO
+I had a lot of trouble with trickleDown.  I suggest using a whiteboard to visualize the logic of the function while you write it out.  It helped me a lot to make decisions about the implementation
