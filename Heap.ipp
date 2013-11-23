@@ -28,6 +28,8 @@ void Heap<Pri,T>::grow(){
 
 template<class Pri, class T>
 void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
+    if (numItems == arrSize)
+        grow();
     backingArray[numItems] = toAdd;
     numItems++;
     bubbleUp(numItems - 1);
