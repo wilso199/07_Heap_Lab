@@ -43,7 +43,10 @@ private:
   //Check the item at index, and make sure it is in the right place.
   // If not, swap it down the "tree" of the heap until you find the right
   // place
-  void trickleDown(unsigned long index);  
+  void trickleDown(unsigned long index);
+    
+  //Check to see if item at index has children with Priorities less than than item
+    bool hasLessChild(unsigned long index);
 };
 
 #include "Heap.ipp"
