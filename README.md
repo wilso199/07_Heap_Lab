@@ -35,11 +35,11 @@ Upon adding 3, it is bubbled up through 7,6 and 4, making it the root of the imp
 
 #### 3. Exercise 10.4 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
 The nth (n is between 1 and d inclusive) child of a node at index i is at index (d*i + n).
+And the parent is at (i-1)/d
 
 #### 4. What is one question that confused you about this exercise, or one piece of advice you would share with students next semester?
 
 Carefully watch the logic between remove() and trickleDown(). There are multiple boundaries you have to watch for with the implicit children.
 It's easy to go beyond the bounds of numItems if you don't keep track with the debugger.
 
-Why not add this as a possible data structure which can be used to satisfy Zeitgeist? You can certainly use this sturcture to store
-rank while the hashtable stores words.
+Why not add this as a possible data structure which can be used to satisfy Zeitgeist? You can certainly use this sturcture to store rank while the hashtable stores words.
