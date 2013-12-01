@@ -18,8 +18,8 @@ Questions
 
 #### 1. Which of the above requirements work, and which do not? For each requirement, write a brief response.
 
-1. TODO
-2. TODO
+1. add() and remove() are O(log n), except when grow() gets called.
+2. All the memories have been allocated properly.
 
 #### 2. Exercises 10.1 and 10.2 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
 Answer for 10.1:
@@ -49,7 +49,7 @@ was stored, and the other items except 8 will remain the same places.
  
 #### 3. Exercise 10.4 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
 Children = n * i + range[1, n] 
-Mother = (i - 1) / n
+Parent = (i - 1) / n
 
 #### 4. What is one question that confused you about this exercise, or one piece of advice you would share with students next semester?
 Right now what I want to say is do not wait a few days before the lab is due to start it, because it is more complicated and time consuming
