@@ -84,21 +84,35 @@ void Heap<Pri,T>::trickleDown(unsigned long index){
   //TODO
     //left 2*i + 1
     //right 2*i+2
-    
-    
+    //no need to trickle down if there are no left or right children.
+    if (2*index+1>=numItems && 2*index+2>=numItems){
+        return;
+    }
     int right = 2*index+2;
     int left = 2*index+1;
 
-    bool parentSmallest = false;
-    //do {
+   // while (backingArray[index].first < backingArray[right].first && backingArray[index].first < backingArray[left].first) {
+    while (backingArray[index].first > backingArray[2*index+1].first || backingArray[index].first > backingArray[2*index+2].first ) {
+
+        if (2*index+1>=numItems && 2*index+2 >= numItems) {
+            return;
+        }
+        
+        
+     right = 2*index+2;
+     left = 2*index+1;
+
     //bigger than right child and right child is smallest child
-    if (backingArray[index].first > backingArray[right].first && backingArray[right]<backingArray[left]) {
+    if (backingArray[index].first > backingArray[right].first &&
+        backingArray[right].first<backingArray[left].first) {
         //swap with right child
         backingArray[index].swap(backingArray[right]);
     }
     //bigger than left child and left child is smallest child
-    else if (backingArray[index].first > backingArray[left].first && backingArray[right]>backingArray[left]) {
+    else if (backingArray[index].first > backingArray[left].first &&
+             backingArray[right].first>backingArray[left].first) {
         backingArray[index].swap(backingArray[left]);
+    }
     }
 //    //Attempt to have it quit when smaller than both its children.
 //        if (backingArray[index].first < backingArray[right].first && backingArray[index].first < backingArray[left].first)
