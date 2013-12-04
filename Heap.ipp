@@ -46,29 +46,11 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
     //http://www.cplusplus.com/reference/array/array/swap/ for reference to swapping.
     //and book for general idea.
     
-   // int newIndex= index;
-    //int p = (newIndex-1)/2;
-//    while (newIndex > 0 && backingArray[newIndex].first < backingArray[p].first && p>=0) {
-//   // while (index > 0 && compare(backingArray[index].first, backingArray[p].first) <0) {
-//            
-//        backingArray[newIndex].swap(backingArray[p]);
-//        
-//       // int tempT = backingArray[index].T;
-//        
-//        
-//        newIndex = p;
-//        p = (newIndex-1)/2;
-//    
-//    
-//    }
     int p = (index-1)/2;
 
     while (index > 0 && backingArray[index].first < backingArray[p].first && p>=0) {
-        // while (index > 0 && compare(backingArray[index].first, backingArray[p].first) <0) {
         
         backingArray[index].swap(backingArray[p]);
-        
-        // int tempT = backingArray[index].T;
         
         
         index = p;
@@ -114,33 +96,6 @@ void Heap<Pri,T>::trickleDown(unsigned long index){
         backingArray[index].swap(backingArray[left]);
     }
     }
-//    //Attempt to have it quit when smaller than both its children.
-//        if (backingArray[index].first < backingArray[right].first && backingArray[index].first < backingArray[left].first)
-//            parentSmallest=true;
-//    
-    //}while (parentSmallest==false);
-        
-    
-//    do {
-//        int j = -1;
-//        int r = 2*index+2;
-//        if (r < numItems && backingArray[r].first < backingArray[index].first) {
-//            int l = 2*index+1;
-//            if (backingArray[l].first< backingArray[r].first) {
-//                j = l;
-//            } else {
-//                j = r;
-//            }
-//        }
-//        else {
-//            int l = 2*index+1;
-//            if (l < numItems && backingArray[l].first < backingArray[index].first) {
-//                j = l;
-//            }
-//        }
-//        if (j >= 0) backingArray(index).swap(backingArray[j]);
-//        index = j;
-//    } while (index >= 0);
 }
 
 template<class Pri, class T>
