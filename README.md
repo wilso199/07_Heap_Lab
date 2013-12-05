@@ -35,4 +35,4 @@ the parent of an item at i, is floor((i − 1)/d), and for the children, they ar
 
 #### 4. What is one question that confused you about this exercise, or one piece of advice you would share with students next semester?
 
-it is a good idea to test your own code, and not just leave it to the pre-made tests.
+Drawing out what is supposed to happen for bubble and trickle can be useful.
