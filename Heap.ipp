@@ -71,11 +71,11 @@ void Heap<Pri,T>::bubbleUp(unsigned long index)
 
       std :: swap(backingArray[index],backingArray[parent]);
 
-      int tep = parent;
+      int tep = index;
 
-      parent = (int)index;
+      parent = tep;
 
-      index = tep;
+      index = parent;
    }
 }
 
