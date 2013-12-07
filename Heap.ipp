@@ -19,7 +19,7 @@ Heap<Pri,T>::~Heap(){
 template<class Pri, class T>
 void Heap<Pri,T>::grow(){
   
-  unsigned long newArrSize = arrSize+START_SIZE;
+  unsigned long newArrSize = arrSize*2;
   std::pair<Pri, T>* original = backingArray;
   std::pair<Pri, T>* updated = new std::pair<Pri, T>[newArrSize];
   backingArray = updated;
@@ -37,8 +37,8 @@ void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
   
   if (numItems+1 > arrSize)
     grow();
-  backingArray[numItems+1] = toAdd;
-  bubbleUp(numItems);      //numItems-1...?
+  backingArray[numItems] = toAdd;
+  bubbleUp(numItems);
   numItems++;
 
 }
@@ -47,19 +47,42 @@ template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
   
   unsigned long parent = (index-1)/2;
-  while (index > 0 && backingArray[index] > backingArray[parent]){
+  while (index > 0 && backingArray[index] < backingArray[parent]){
     std::pair<Pri, T> temp = backingArray[index];
 	backingArray[index] = backingArray[parent];
 	backingArray[parent] = temp;
 	index = parent;
-	parent = (parent-1)/2;
+	parent = (index-1)/2;
   }
 
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
-  //TODO
+  
+  do{
+    int count = -1;
+	int rightChild = 2*index+2;
+	if (rightChild < numItems && backingArray[rightChild] < backingArray[index]){
+	  int leftChild = 2*index+1;
+	  if (backingArray[leftChild] < backingArray[rightChild])
+	    count = leftChild;
+	  else
+	    count = rightChild;
+	}
+	else{
+	  int leftChild = 2*index+1;
+	  if (leftChild < numItems && backingArray[leftChild] < backingArray[index])
+	    count = leftChild;
+	}
+	if (count >= 0){
+	  std::pair<Pri, T> temp = backingArray[index];
+	  backingArray[index] = backingArray[count];
+	  backingArray[count] = temp;
+	}
+	index = count;
+  }while (index > 2*index+1 && index > 2*index+2);
+
 }
 
 template<class Pri, class T>
@@ -68,6 +91,7 @@ std::pair<Pri,T> Heap<Pri,T>::remove(){
   std::pair<Pri, T> temp = backingArray[0];
   backingArray[0] = backingArray[numItems-1];
   trickleDown(0);
+  numItems--;
   return temp;
   
 }
