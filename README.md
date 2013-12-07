@@ -35,7 +35,10 @@ For each of the examples in this exercise (7 and 3), they would first be added t
 For the next two removals in this exercise (6 and 8) the head of the tree would first be replaced with the last entry in the heap. The node at the head of the tree would then be compared to each of its children, and would be swapped with the lesser of the two children. This process would continue to happen until the node being moved down was greater than all of its children (or if it simply has no children). This could be applied specifically to the two examples in this exercise as well, as for 6 it would be replaced with 55, then 55 would be swapped with 8 and 16 (in that order) and come to rest as the right child of 16. For 8, it would first be replaced with 93, then 93 would swap places with 9, 17, and 19 (in that order) until it would finally come to rest as the left child of 19.
 
 #### 3. Exercise 10.4 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
-TODO
+
+10.4
+
+For this exercise, you would find the parent of any given node at index i by using the equation (i-1)/d, where d is the maximum number of children that any given node in the heap could have. To find the location(s) of the node at index i's children, you would use the equation (i*d)+n, where d is again the maximum number of children for any given node in the heap and n is the number of the specific child being searched for.  For example, to find the first child of a node you would use n=1, to find the second child you would use n=2, the third child would be n=3, and so on.
 
 #### 4. What is one question that confused you about this exercise, or one piece of advice you would share with students next semester?
 
