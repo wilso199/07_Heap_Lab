@@ -104,6 +104,8 @@ void Heap<Pri,T>::trickleDown(unsigned long index){
 		backingArray[index] = backingArray[right];
 		backingArray[right] = temp;
 
+		//We have to recalculate the next index based on the right!
+		index = 2*index + 2;
 
 	//If the index on the right was not smaller, but the one on the left it, swap!
 	}else if(backingArray[index].first > backingArray[left].first && backingArray[right].first > backingArray[left].first){
@@ -113,14 +115,16 @@ void Heap<Pri,T>::trickleDown(unsigned long index){
 		backingArray[index] = backingArray[left];
 		backingArray[left] = temp;
 
+		//We have to recalculate the next index based on the left!
+		index = 2*index + 1;
+
 
 	}else{
 		return;
 	}
 
 
-	//We have to recalculate the next index!
-	index = 2*index + 2;
+	
 
 	//We have to recalculate the left/right if this loops more than once!
 	left = 2*index+1;
