@@ -43,14 +43,38 @@ void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
 	backingArray[numItems+1] = toAdd;
 
 
-	//TODO
+	//Bubble up the item we just added!
 	bubbleUp(numItems-1);
+
+	//Increase the amount of items
+	numItems++;
 
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
-  //TODO
+  //To find the previous index, we will use (index-1)/2
+
+  int prev = (index-1)/2;
+
+  //Check to see if the index is 0 or the prev is less than 0
+  if(index == 0 || prev < 0) return;
+
+  //If we should bubble up at least once, then go!
+  while(index > 0 && prev >= 0 && backingArray[index].first < backingArray[prev].first){
+	
+	//Swap the two indices
+	std::pair<Pri, T> temp = backingArray[index];
+	backingArray[index] = backingArray[prev];
+	backingArray[prev] = temp;
+
+	//Set the index to the previous entry, and get the previous entry for that one as well!
+	index = prev;
+	prev = (index-1)/2;
+
+
+  } 
+
 }
 
 template<class Pri, class T>
