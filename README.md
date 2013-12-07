@@ -25,7 +25,14 @@ Questions
 2. There should be no memory leakage in this program, as the destructor and remove function as they are supposed to.
 
 #### 2. Exercises 10.1 and 10.2 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
-TODO
+
+10.1
+
+For each of the examples in this exercise (7 and 3), they would first be added to the last open slot in the heap. They would then be compared to their parent, and if they were lesser than their parent the two values would swap places. This would continue to happen until the recently added node was greater than its parent, in which case the process would end and the nodes would have found their final heap locations. This could be applied specifically to the examples given as well, as for 7 it would first be placed as the left child of 16, would swap places with 16, and would stay there because it is less than its parent of 6. Assuming 7 had already been placed in the heap, 3 would be initially inserted into the heap as the right child of 7, would swap places with 7, 6, and 4 (in that order), and finally come to rest at the head of the heap because there would be no parents left to compare it to.
+
+10.2
+
+For the next two removals in this exercise (6 and 8) the head of the tree would first be replaced with the last entry in the heap. The node at the head of the tree would then be compared to each of its children, and would be swapped with the lesser of the two children. This process would continue to happen until the node being moved down was greater than all of its children (or if it simply has no children). This could be applied specifically to the two examples in this exercise as well, as for 6 it would be replaced with 55, then 55 would be swapped with 8 and 16 (in that order) and come to rest as the right child of 16. For 8, it would first be replaced with 93, then 93 would swap places with 9, 17, and 19 (in that order) until it would finally come to rest as the left child of 19.
 
 #### 3. Exercise 10.4 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
 TODO
