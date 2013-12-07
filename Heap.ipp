@@ -37,7 +37,15 @@ void Heap<Pri,T>::grow(){
 
 template<class Pri, class T>
 void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
-  //TODO
+	
+	if(numItems+1 > arrSize) grow();  //If the amount of items is at it's max!
+
+	backingArray[numItems+1] = toAdd;
+
+
+	//TODO
+	bubbleUp(numItems-1);
+
 }
 
 template<class Pri, class T>
@@ -52,8 +60,20 @@ void Heap<Pri,T>::trickleDown(unsigned long index){
 
 template<class Pri, class T>
 std::pair<Pri,T> Heap<Pri,T>::remove(){
-  //TODO
-  std::pair<Pri,T> tmp;
+  
+  //If the array is empty, we can't remove anything!
+  if(numItems == 0) throw (std::string) "There is nothing to remove!";
+
+  //Here we swap the root with the last item in the array, keeping heap order and making the remove easy!
+  std::pair<Pri,T> tmp = backingArray[0];
+  backingArray[0] = backingArray[numItems-1];
+  numItems--;
+
+  //Trickle down the item that is now at the root, as it will most likely need to be restructured!
+  trickleDown(0);
+
+
+  //Return the item!
   return tmp;
 }
 
