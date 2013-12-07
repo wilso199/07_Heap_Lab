@@ -2,43 +2,103 @@
 
 template<class Pri, class T>
 Heap<Pri,T>::Heap(){
-  //TODO
+  
+  arrSize = START_SIZE;
+  numItems = 0;
+  backingArray = new std::pair<Pri, T>[arrSize];
+
 }
 
 template<class Pri, class T>
 Heap<Pri,T>::~Heap(){
-  //TODO
+  
+  delete[] backingArray;
+
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::grow(){
-  //TODO
+  
+  unsigned long newArrSize = arrSize*2;
+  std::pair<Pri, T>* original = backingArray;
+  std::pair<Pri, T>* updated = new std::pair<Pri, T>[newArrSize];
+  backingArray = updated;
+  arrSize = newArrSize;
+  numItems = 0;
+  
+  for (int index = 0; index < arrSize-START_SIZE; index++)
+    add (original[index]);
+  delete[] original;
+
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
-  //TODO
+  
+  if (numItems+1 > arrSize)
+    grow();
+  backingArray[numItems] = toAdd;
+  bubbleUp(numItems);
+  numItems++;
+
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
-  //TODO
+  
+  unsigned long parent = (index-1)/2;
+  while (index > 0 && backingArray[index] < backingArray[parent]){
+    std::pair<Pri, T> temp = backingArray[index];
+	backingArray[index] = backingArray[parent];
+	backingArray[parent] = temp;
+	index = parent;
+	parent = (index-1)/2;
+  }
+
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
-  //TODO
+  
+  do{
+    int count = -1;
+	int rightChild = 2*index+2;
+	if (rightChild < numItems && backingArray[rightChild] < backingArray[index]){
+	  int leftChild = 2*index+1;
+	  if (backingArray[leftChild] < backingArray[rightChild])
+	    count = leftChild;
+	  else
+	    count = rightChild;
+	}
+	else{
+	  int leftChild = 2*index+1;
+	  if (leftChild < numItems && backingArray[leftChild] < backingArray[index])
+	    count = leftChild;
+	}
+	if (count >= 0){
+	  std::pair<Pri, T> temp = backingArray[index];
+	  backingArray[index] = backingArray[count];
+	  backingArray[count] = temp;
+	}
+	index = count;
+  }while (index > 2*index+1 && index > 2*index+2);
+
 }
 
 template<class Pri, class T>
 std::pair<Pri,T> Heap<Pri,T>::remove(){
-  //TODO
-  std::pair<Pri,T> tmp;
-  return tmp;
+  
+  std::pair<Pri, T> temp = backingArray[0];
+  backingArray[0] = backingArray[numItems-1];
+  trickleDown(0);
+  numItems--;
+  return temp;
+  
 }
 
 template<class Pri, class T>
 unsigned long Heap<Pri,T>::getNumItems(){
-  //TODO
-  return 0;
+  
+  return numItems;
+
 }
