@@ -12,7 +12,7 @@ void testHeap(){
   
   if(myHeap.getNumItems() != 5){
     std::cout << "ERROR: Expected 5 items, but got " << myHeap.getNumItems() << std::endl;
-    exit(1);
+    std::cin.get();
   } else {
     std::cout << "SUCCESS: Found 5 items, as expected." << std::endl;
   }
@@ -21,14 +21,14 @@ void testHeap(){
   item = myHeap.remove();
   if(item.first != 0){
     std::cout << "ERROR: Expected key 0, but got " << item.first << std::endl;
-    exit(1);
+    std::cin.get();
   } else {
     std::cout << "SUCCESS: Found item 0 as expected." << std::endl;
   }
 
   if(myHeap.getNumItems() != 4){
     std::cout << "ERROR: Expected 4 items, but got " << myHeap.getNumItems() << std::endl;
-    exit(1);
+    std::cin.get();
   } else {
     std::cout << "SUCCESS: Found 4 items, as expected." << std::endl;
   }
@@ -36,7 +36,7 @@ void testHeap(){
   item = myHeap.remove();
   if(item.first != 1){
     std::cout << "ERROR: Expected key 1, but got " << item.first << std::endl;
-    exit(1);
+    std::cin.get();
   } else {
     std::cout << "SUCCESS: Found item 1 as expected." << std::endl;
   }
@@ -44,7 +44,7 @@ void testHeap(){
   item = myHeap.remove();
   if(item.first != 5){
     std::cout << "ERROR: Expected key 5, but got " << item.first << std::endl;
-    exit(1);
+    std::cin.get();
   } else {
     std::cout << "SUCCESS: Found item 5 as expected." << std::endl;
   }
@@ -52,7 +52,7 @@ void testHeap(){
   item = myHeap.remove();
   if(item.first != 7){
     std::cout << "ERROR: Expected key 7, but got " << item.first << std::endl;
-    exit(1);
+    std::cin.get();
   } else {
     std::cout << "SUCCESS: Found item 7 as expected." << std::endl;
   }
@@ -60,7 +60,7 @@ void testHeap(){
   item = myHeap.remove();
   if(item.first != 10){
     std::cout << "ERROR: Expected key 10, but got " << item.first << std::endl;
-    exit(1);
+    std::cin.get();
   } else {
     std::cout << "SUCCESS: Found item 10 as expected." << std::endl;
   }
@@ -69,6 +69,6 @@ void testHeap(){
 
 int main(){
   testHeap();
-
+  std::cin.get();
   return 0;
 }
