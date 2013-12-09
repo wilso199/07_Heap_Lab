@@ -32,11 +32,12 @@ void Heap<Pri,T>::grow(){
 template<class Pri, class T>
 void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
   
+  //Using books method
   if(numItems == arrSize)
 	grow();
-  backingArray[numItems] = toAdd;
-  bubbleUp(numItems);
-  numItems++;
+  backingArray[numItems++] = toAdd;
+  bubbleUp(numItems - 1);
+
 }
 
 //Check the item at index, and make sure it is in the right place.
@@ -44,7 +45,13 @@ void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
 // place
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
-  //TODO
+  
+  int p = (index-1)/2;
+    while (i > 0 && compare(a[i], a[p]) < 0) {
+      a.swap(i,p);
+      i = p;
+      p = parent(i);
+    }
 }
 
 //Check the item at index, and make sure it is in the right place.
