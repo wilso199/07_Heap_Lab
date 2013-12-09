@@ -22,11 +22,12 @@ void Heap<Pri,T>::grow(){
 template<class Pri, class T>
 void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
   //TODO
-  if(numItems+1==arrSize)
+  if(numItems==arrSize)
 	grow();
   backingArray[numItems]=toAdd;
-  bubbleUp(numItems);
   numItems++;
+  if(numItems>1)
+	bubbleUp(numItems);
 
 }
 
@@ -36,7 +37,7 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
   //keep in mind, parent(i)=(index-1)/2, left=(2*index)+1, right=(2*index)+2
 
   int p = (index-1)/2;
-  if(index>=0&&(backingArray[index].first < backingArray[p].first)){
+  if(p>=0&&(backingArray[index].first < backingArray[p].first&&index>0)){
 	backingArray[p].swap(backingArray[index]);
 	if(p>0)
 		bubbleUp(p); 
@@ -57,20 +58,31 @@ void Heap<Pri,T>::trickleDown(unsigned long index){
   // taken straight from the book, modified without the use of compare()
   do{
 	  int j = -1;
+	  r = (2*index)+2;
 	  if(r<numItems && (backingArray[r].first < backingArray[index].first)){
+		l = (2*index)+1;
 		if(backingArray[l].first < backingArray[r].first)
 			j=l;
 		else
 			j=r;
 
 	  }else{
+		l = (2*index)+1;
 		if(l<numItems && (backingArray[l].first < backingArray[index].first)){
 			j=l;
+			}
 		}
 		if(j>=0)
-			backingArray[j].swap(backingArray[index]);
+		{
+			// to fix bugs, compared to kojsmn's section for how he interpreted the book (https://github.com/MiamiOH-CSE274/07_Heap_Lab/blob/kojsmn/Heap.ipp)
+			std::pair <Pri, T> tmp = backingArray[index];
+			backingArray[index].first=backingArray[j].first;
+			backingArray[index].second=backingArray[j].second;
+			backingArray[j].first=tmp.first;
+			backingArray[j].second=tmp.second;
+		}
 		index=j;
-	  }
+	  
 	}while(index >=0);
 
 
@@ -83,7 +95,7 @@ std::pair<Pri,T> Heap<Pri,T>::remove(){
   std::pair<Pri,T> tmp;
 
   tmp = backingArray[0];
-  backingArray[0] = backingArray[numItems-1];
+  backingArray[0]=backingArray[numItems-1];
   numItems--;
   trickleDown(0);
 
