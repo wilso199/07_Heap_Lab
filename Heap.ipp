@@ -67,9 +67,9 @@ void Heap<Pri,T>::trickleDown(unsigned long index){
 		}
 
 		//If left is smaller
-		if(backingArray[right].first < backingArray[left].first && backingArray[right].first <= backingArray[index].first){
+		if(backingArray[right].first < backingArray[left].first && backingArray[right].first >= backingArray[index].first){
 			backingArray[right].swap(backingArray[index]);
-			trickleDown(right);
+			trickleDown(index);
 		}
 
 
