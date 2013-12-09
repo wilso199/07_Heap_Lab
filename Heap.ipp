@@ -3,11 +3,15 @@
 template<class Pri, class T>
 Heap<Pri,T>::Heap(){
   //TODO
+
+  numItems=0;
+  arrSize=START_SIZE;
+  backingArray=new std::pair<Pri,T>[arrSize];
 }
 
 template<class Pri, class T>
 Heap<Pri,T>::~Heap(){
-  //TODO
+  delete[] backingArray;
 }
 
 template<class Pri, class T>
@@ -18,6 +22,8 @@ void Heap<Pri,T>::grow(){
 template<class Pri, class T>
 void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
   //TODO
+  numItems++;
+
 }
 
 template<class Pri, class T>
@@ -34,11 +40,14 @@ template<class Pri, class T>
 std::pair<Pri,T> Heap<Pri,T>::remove(){
   //TODO
   std::pair<Pri,T> tmp;
+
+  numItems--;
+
   return tmp;
 }
 
 template<class Pri, class T>
 unsigned long Heap<Pri,T>::getNumItems(){
   //TODO
-  return 0;
+  return numItems;
 }
