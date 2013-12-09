@@ -21,8 +21,8 @@ Questions
 
 #### 1. Which of the above requirements work, and which do not? For each requirement, write a brief response.
 
-1. TODO
-2. TODO
+1. Working, add and remove both take O(log(n)), and grow which may be called in add takes O(n).
+2. Working, the backingArray is being de-allocated in the destructor.
 
 #### 2. Exercises 10.1 and 10.2 from http://opendatastructures.org/ods-cpp/10_3_Discussion_Exercises.html
 TODO
