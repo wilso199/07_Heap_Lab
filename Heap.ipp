@@ -83,6 +83,7 @@ std::pair<Pri,T> Heap<Pri,T>::remove(){
   std::pair<Pri,T> tmp;
 
   tmp = backingArray[0];
+  backingArray[0] = backingArray[numItems-1];
   numItems--;
   trickleDown(0);
 
