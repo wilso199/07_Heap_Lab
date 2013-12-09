@@ -31,7 +31,12 @@ void Heap<Pri,T>::grow(){
 //Add a new item
 template<class Pri, class T>
 void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
-  //TODO
+  
+  if(numItems == arrSize)
+	grow();
+  backingArray[numItems] = toAdd;
+  bubbleUp(numItems);
+  numItems++;
 }
 
 //Check the item at index, and make sure it is in the right place.
