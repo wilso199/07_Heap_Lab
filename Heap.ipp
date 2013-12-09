@@ -47,22 +47,40 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
   //right child = 2*parent+2 ... parent = floor((child-1)/2)
 
   
-  if((index-1)/2 >= 0 && backingArray[(index-1)/2].first > backingArray[index].first && index > 0){
+  if((index-1)/2 >= 0 && backingArray[index].first < backingArray[(index-1)/2].first && index > 0){
 		backingArray[index].swap(backingArray[(index-1)/2]);
+
+		//This keeps switching until it is in the right place.
+		if(((index-1)/2 > 0))
+			bubbleUp((index-1)/2);
 	}
-	if(((index-1)/2 > 0)
-		bubbleUp((index-1)/2);
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
-  //TODO
+	int right = 2*index+2;
+	int left = 2*index+1;	
+		//If right is smaller
+		if(backingArray[right].first < backingArray[left].first && backingArray[right].first < backingArray[index].first){
+			backingArray[index].swap(backingArray[right]);
+			trickleDown(right);
+		}
+
+		//If left is smaller
+		if(backingArray[right].first < backingArray[left].first && backingArray[right].first <= backingArray[index].first){
+			backingArray[right].swap(backingArray[index]);
+			trickleDown(right);
+		}
+
+
 }
 
 template<class Pri, class T>
 std::pair<Pri,T> Heap<Pri,T>::remove(){
-  //TODO
-  std::pair<Pri,T> tmp;
+ 
+  std::pair<Pri,T> tmp = backingArray[0];
+  trickleDown(0);
+  numItems--;
   return tmp;
 }
 
