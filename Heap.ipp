@@ -1,13 +1,20 @@
 #include <string>
 
+/*
+Please note that I've gotten some help from watching youTube videos, particularly from Paul Prgramming
+http://www.youtube.com/watch?v=c1TpLRyQJ4w
+*/
+
 template<class Pri, class T>
 Heap<Pri,T>::Heap(){
-  //TODO
+  backingArray = new std::pair<Pri,T>[START_SIZE];
+  numItems = 0;
+  arrSize = START_SIZE;
 }
 
 template<class Pri, class T>
 Heap<Pri,T>::~Heap(){
-  //TODO
+  delete backingArray;
 }
 
 template<class Pri, class T>
