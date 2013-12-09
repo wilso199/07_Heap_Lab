@@ -58,18 +58,20 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
+
+//Got general idea from http://www.youtube.com/watch?v=ijfPvX2qYOQ 
 	int right = 2*index+2;
 	int left = 2*index+1;	
 		//If right is smaller
 		if(backingArray[right].first < backingArray[left].first && backingArray[right].first < backingArray[index].first){
 			backingArray[index].swap(backingArray[right]);
-			trickleDown(right);
+			
 		}
 
 		//If left is smaller
-		if(backingArray[right].first < backingArray[left].first && backingArray[right].first >= backingArray[index].first){
-			backingArray[right].swap(backingArray[index]);
-			trickleDown(index);
+		if(backingArray[right].first > backingArray[left].first && backingArray[left].first < backingArray[index].first){
+			backingArray[left].swap(backingArray[index]);
+			
 		}
 
 
@@ -77,10 +79,11 @@ void Heap<Pri,T>::trickleDown(unsigned long index){
 
 template<class Pri, class T>
 std::pair<Pri,T> Heap<Pri,T>::remove(){
- 
+  
   std::pair<Pri,T> tmp = backingArray[0];
+  backingArray[0] = backingArray[--numItems];
   trickleDown(0);
-  numItems--;
+  
   return tmp;
 }
 
