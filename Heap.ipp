@@ -49,6 +49,7 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
   int p = (index - 1)/2;
 
   while(index > 0 && (backingArray[index].first < backingArray[p].first)) {
+	//Didn't realize this was possible, got this from both the book and mainly ZHONGM2
 	std::swap(backingArray[index], backingArray[p]);
 	int temp = p;
 	p = index;
@@ -59,13 +60,14 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 //Check the item at index, and make sure it is in the right place.
 // If not, swap it down the "tree" of the heap until you find the right
 // place
+// **NOTE** was not able to implement most of this on my own, some code was used from the book and then I had to borrow logic and syntax from ZHONGM2
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
 	int p = index;
 	int left;
 	int right;
 
-	for(int i = 0; i < numItems; i++) {
+	do {
 		int j = -1;
 		right = 2*p + 2;
 
@@ -88,7 +90,7 @@ void Heap<Pri,T>::trickleDown(unsigned long index){
 		if(j >= 0)
 			std::swap(backingArray[p], backingArray[j]);
 		p = j;
-	}
+	} while (p >= 0);
 	
 }
 
