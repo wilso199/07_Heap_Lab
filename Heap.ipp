@@ -1,7 +1,7 @@
 #include <string>
 
 /*
-Please note that I've gotten some help from watching youTube videos, particularly from Paul Prgramming
+Please note that I've gotten help from watching youTube videos, particularly from Paul Prgramming
 http://www.youtube.com/watch?v=c1TpLRyQJ4w
 */
 
@@ -14,17 +14,29 @@ Heap<Pri,T>::Heap(){
 
 template<class Pri, class T>
 Heap<Pri,T>::~Heap(){
-  delete backingArray;
+  delete[] backingArray;
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::grow(){
-  //TODO
+  std::pair<Pri,T>* newArr = new std::pair<Pri, T> [arrSize*2];
+  for(int i = 0; i < numItems; i++){
+	newArr[i] = backingArray[i];
+  } //end of for loop
+
+  delete[] backingArray;
+  backingArray = newArr;
+  arrSize = arrSize*2;
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
-  //TODO
+  if(numItems == arrSize)
+	grow();
+  backingArray[numItems] = toAdd;
+  trickleDown(numItems);
+  numItems++;
+
 }
 
 template<class Pri, class T>
@@ -46,6 +58,5 @@ std::pair<Pri,T> Heap<Pri,T>::remove(){
 
 template<class Pri, class T>
 unsigned long Heap<Pri,T>::getNumItems(){
-  //TODO
-  return 0;
+  return numItems;
 }
