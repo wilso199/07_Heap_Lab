@@ -33,7 +33,16 @@ void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
   //TODO
-  //keep in mind, parent(i)=(index-1)/2
+  //keep in mind, parent(i)=(index-1)/2, left=(2*index)+1, right=(2*index)+2
+
+  int p = (index-1)/2;
+  if(index>=0&&(backingArray[index].first < backingArray[p].first)){
+	backingArray[p].swap(backingArray[index]);
+	if(p>0)
+		bubbleUp(p); 
+  }
+  
+  	
 
 }
 
