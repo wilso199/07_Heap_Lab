@@ -34,14 +34,24 @@ void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
   if(numItems == arrSize)
 	grow();
   backingArray[numItems] = toAdd;
-  trickleDown(numItems);
+  bubbleUp(numItems);
   numItems++;
 
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
-  //TODO
+  //So if the newest value added is greater than any 
+  //value above it must bubble up.
+  //Given in class that left child = 2*parent+1
+  //right child = 2*parent+2 ... parent = floor((child-1)/2)
+
+  
+  if((index-1)/2 >= 0 && backingArray[(index-1)/2].first > backingArray[index].first && index > 0){
+		backingArray[index].swap(backingArray[(index-1)/2]);
+	}
+	if(((index-1)/2 > 0)
+		bubbleUp((index-1)/2);
 }
 
 template<class Pri, class T>
