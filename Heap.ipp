@@ -45,7 +45,15 @@ void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
 // place
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
-  
+  //Using book method
+  int p = (index - 1)/2;
+
+  while(index > 0 && (backingArray[index].first < backingArray[p].first)) {
+	std::swap(backingArray[index], backingArray[p]);
+	int temp = p;
+	p = index;
+	index = temp;
+  }
 }
 
 //Check the item at index, and make sure it is in the right place.
@@ -53,7 +61,35 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 // place
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
+	int p = index;
+	int left;
+	int right;
 
+	for(int i = 0; i < numItems; i++) {
+		int j = -1;
+		right = 2*p + 2;
+
+		if(right < numItems && backingArray[right].first < backingArray[p].first) {
+			left = 2*index + 1;
+
+			if(backingArray[left].first < backingArray[right].first)
+				j = left;
+			else
+				j = right;
+		}
+
+		else {
+			left = 2*p + 1;
+
+			if(left < numItems && backingArray[left].first < backingArray[p].first)
+				j = left;
+		}
+
+		if(j >= 0)
+			std::swap(backingArray[p], backingArray[j]);
+		p = j;
+	}
+	
 }
 
 //Remove the item with lowest priority, and return it
