@@ -49,6 +49,9 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
   //TODO
+  //keep in mind, parent(i)=(index-1)/2, left=(2*index)+1, right=(2*index)+2
+
+
 }
 
 template<class Pri, class T>
@@ -56,7 +59,9 @@ std::pair<Pri,T> Heap<Pri,T>::remove(){
   //TODO
   std::pair<Pri,T> tmp;
 
+  tmp = backingArray[0];
   numItems--;
+  trickleDown(0);
 
   return tmp;
 }
