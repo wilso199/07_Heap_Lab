@@ -78,23 +78,46 @@ void Heap<Pri,T>::grow(){
 
 template<class Pri, class T>
 void Heap<Pri,T>::add(std::pair<Pri,T> toAdd){
-    //TODO
+    
+    if(numItems == arrSize){
+        grow();
+    }
+    backingArray[numItems] = toAdd;
+    numItems++;
+    bubbleUp(numItems-1);
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::bubbleUp(unsigned long index){
-    //TODO
+    
+    unsigned long parent = (index-1)/2;
+    
+    //This should work the same as a bubble sort method. Comparing two items next to each
+    //other and swapping them if the right one is lesser than the left one. 
+    while(index > 0 && backingArray[index] < backingArray[parent]){
+        std::pair<Pri, T> tmp = backingArray[parent];
+        backingArray[parent] = backingArray[index];
+        backingArray[index] = tmp;
+    }
 }
 
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
-    //TODO
+ //TODO
 }
 
 template<class Pri, class T>
 std::pair<Pri,T> Heap<Pri,T>::remove(){
-    //TODO
-    std::pair<Pri,T> tmp;
+    
+    if(numItems == 0){
+        throw std::string("No elements to remove");
+    }
+    
+    std::pair<Pri,T> tmp = backingArray[0];
+    backingArray[0] = backingArray[numItems - 1];
+    trickleDown(0);
+    numItems --;
+    
     return tmp;
 }
 
