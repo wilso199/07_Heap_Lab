@@ -103,7 +103,32 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
 
 template<class Pri, class T>
 void Heap<Pri,T>::trickleDown(unsigned long index){
- //TODO
+    
+    do {
+        int j = -1;
+        unsigned long right = 2*index + 2;
+        if (right < numItems && backingArray[right] < backingArray[index]) {
+            unsigned long left = 2*index + 1;
+            if (backingArray[left] < backingArray[right]) {
+                j = left;
+            } else {
+                j = right;
+            }
+        } else {
+            unsigned long left = 2*index + 1;
+            if (left < numItems && backingArray[left] < backingArray[index]) {
+                j = left;
+            }
+        }
+        if (j >= 0){
+            std::pair<Pri, T> tmp;
+            tmp = backingArray[index];
+            backingArray[index]=backingArray[j];
+            backingArray[j] = tmp;
+        }
+        index = j;
+        
+    } while (index <= 0);
 }
 
 template<class Pri, class T>
