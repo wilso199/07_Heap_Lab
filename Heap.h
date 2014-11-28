@@ -102,6 +102,8 @@ void Heap<Pri,T>::bubbleUp(unsigned long index){
         backingArray[parent] = backingArray[index];
         backingArray[index] = tmp;
     }
+    index = parent;
+    parent = (index - 1)/2;
 }
 
 template<class Pri, class T>
